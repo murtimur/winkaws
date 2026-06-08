@@ -1,0 +1,5 @@
+DBCC CHECKIDENT ('ErpUsers', RESEED, 0)
+
+Eger idler 1 den baslamaz ise bu query i kullan
+
+'ErpUser' olan kisim tablo name 0 ise sonra ki deger 1 olarak atayacak demektir

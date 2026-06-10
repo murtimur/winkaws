@@ -32,7 +32,7 @@ public class SecurityConfiguration {
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 						.requestMatchers(SWAGGER_PATHS).permitAll().requestMatchers(PERMIT_PATHS).permitAll()
-						.requestMatchers(ADMIN_PATHS).hasRole("ADMIN").anyRequest().hasAnyRole(AUTHORIZATION_NAMES))
+						.requestMatchers(ADMIN_PATHS).hasRole("ADMIN").anyRequest().hasAnyAuthority(AUTHORIZATION_NAMES))
 				.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class).build();
 	}
 
@@ -42,7 +42,7 @@ public class SecurityConfiguration {
 	
 	public static final String[] ADMIN_PATHS = { "/api/1.0.1/users/**" };
 	
-	public static final String[] AUTHORIZATION_NAMES = { "ADMIN", "USER", "MANAGER", "OPERATOR" };
+	public static final String[] AUTHORIZATION_NAMES = { "ROLE_ADMIN", "ROLE_USER", "ROLE_MANAGER", "ROLE_OPERATOR" };
 
 	@Bean
 	public FilterRegistrationBean<TokenFilter> tokenFilterRegistration(TokenFilter tokenFilter) {
